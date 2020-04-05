@@ -9,7 +9,7 @@ module SolidusSimpleDash
           [:overview],
           'bar-chart',
           label: 'overview',
-          condition: -> { can?(:manage, Spree::Overview) }
+          condition: -> { can?(:manage, ::Spree::Overview) }
         )
       end
     end
