@@ -1,7 +1,10 @@
+require 'spree/core'
+
 module SolidusSimpleDash
   class Engine < Rails::Engine
-    require 'spree/core'
-    isolate_namespace Spree
+    include SolidusSupport::EngineExtensions::Decorators
+
+    isolate_namespace ::Spree
     engine_name 'solidus_simple_dash'
 
     # use rspec for tests
@@ -14,13 +17,5 @@ module SolidusSimpleDash
     initializer 'solidus_simple_dash.environment', before: :load_config_initializers do
       SolidusSimpleDash::Config = SolidusSimpleDash::Configuration.new
     end
-
-    def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-    end
-
-    config.to_prepare(&method(:activate).to_proc)
   end
 end
