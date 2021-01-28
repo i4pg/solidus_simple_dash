@@ -2,8 +2,8 @@ module Spree
   class Overview
     attr_accessor :to, :from, :name, :value
 
-    DEFAULT_COLORS = ['#0093DA', '#FF3500', '#92DB00', '#1AB3FF',
-      '#FFB800'].freeze
+    DEFAULT_COLORS = ['#6009cc', '#069be8', '#119da4', '#f24a4a',
+      '#f6a82f'].freeze
 
     def initialize(params)
       @to = params[:to]
