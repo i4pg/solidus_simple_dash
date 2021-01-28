@@ -56,9 +56,9 @@ function handle_orders_by_day(settings, r, e, t) {
 function handle_orders_total(r) {
   var values = eval(r);
 
-  jQuery('#orders_total').text(number_with_delimiter(values[0].orders_total));
-  jQuery('#orders_line_total').text(number_with_delimiter(values[0].orders_line_total));
-  jQuery('#orders_adjustment_total').text(number_with_delimiter(values[0].orders_adjustment_total));
+  jQuery('#orders_total .value').text(number_with_delimiter(values[0].orders_total));
+  jQuery('#orders_line_total .value').text(number_with_delimiter(values[0].orders_line_total));
+  jQuery('#orders_adjustment_total .value').text(number_with_delimiter(values[0].orders_adjustment_total));
 }
 
 function build_options(points, settings) {
@@ -80,7 +80,8 @@ jQuery(document).ready(function() {
       renderer: jQuery.jqplot.PieRenderer,
       rendererOptions: {
         padding: 6,
-        sliceMargin: 0
+        sliceMargin: 3,
+        shadow: false
       }
     },
     seriesColors: pie_colors
@@ -93,8 +94,10 @@ jQuery(document).ready(function() {
     },
     grid: {
       background:'#fff',
-      gridLineColor:'#fff',
-      borderColor: '#476D9B'
+      gridLineColor:'#dee2e6',
+      borderColor: '#6c757d',
+      borderWidth: 1,
+      shadow: false
     },
     axes:{
       yaxis:{
@@ -104,10 +107,11 @@ jQuery(document).ready(function() {
         tickOptions:{
           formatString:'%d',
           fontSize: '10pt',
-          textColor: '#476D9B'
+          textColor: '#6c757d'
         },
         min: 0,
-        tickInterval: 1
+        tickInterval: 1,
+        borderWidth: 2
       },
       xaxis:{
         renderer: jQuery.jqplot.DateAxisRenderer,
@@ -118,7 +122,7 @@ jQuery(document).ready(function() {
           formatString:'%b %#d, %y',
           angle: -30,
           fontSize: '10pt',
-          textColor: '#476D9B'
+          textColor: '#6c757d'
         },
         min: 0,
         max: 0//,
@@ -127,7 +131,7 @@ jQuery(document).ready(function() {
     },
     series:[
       {
-        lineWidth:3, color: '#0095DA', fillAndStroke: true, fill: true, fillColor: '#E6F7FF'
+        lineWidth:3, color: '#0b23ff', fillAndStroke: true, fill: true, fillColor: '#f5f6ff'
       }
     ],
     highlighter: {

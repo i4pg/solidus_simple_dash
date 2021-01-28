@@ -21,54 +21,26 @@
 }
 
 #order_totals {
-  background: #154E8C; /*url(<%= asset_path("admin/bg/admin_tab_back.png") %>) repeat-x scroll left top;*/
-  -moz-border-radius-bottomleft: 10px;
-  -moz-border-radius-bottomright: 10px;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-topright: 10px;
-  -webkit-border-bottom-left-radius: 10px 10px;
-  -webkit-border-bottom-right-radius: 10px 10px;
-  -webkit-border-top-left-radius: 10px 10px;
-  -webkit-border-top-right-radius: 10px 10px;
-  color: #fff;
-  height: 62px;
-  padding: 0 10px;
+  padding: 10px 10px 30px;
 }
 
-#order_totals hr {
-  background-color: #fff;
-  clear: none;
-  float: left;
-  height: 80%;
-  margin-top: 6px;
-  width: 3px;
-}
-
-#order_totals .spacer {
-  padding: 0px 10px;
-  font-size: 50px;
-  line-height: 60px;
-  color: #476D9B;
-}
-
-#order_totals p {
-  float: left;
-  font-size: 420%;
-  font-weight: bold;
-  line-height: 60px;
-  margin: 0 5px 0 0;
+#order_totals td {
+  text-align: center;
+  border-top: none;
 }
 
 #order_totals label {
-  font-size: 3em;
-  line-height: 50px;
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 600;
 }
 
-#order_totals span {
+#order_totals .order_totals_title {
   display: block;
-  font-size: 90%;
-  font-weight: bold;
-  margin-top: -10px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 10px;
+  color: #6c757d;
 }
 
 .dashboard_main #by_day_options label {
@@ -96,9 +68,8 @@
 .bar-title {
   position: relative;
   text-align: center;
-  color: rgb(159, 200, 32);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
@@ -109,7 +80,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: #cee1f4;
+  background: #e5e7eb;
   z-index: 0;
 }
 
@@ -159,4 +130,17 @@
 
 .jqplot-table-legend {
   width: 60px;
+}
+
+#by-day-options {
+  padding: 30px 15px;
+  background-color: #f9fafb;
+  align-items: center;
+}
+
+#by-day-options h3 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 37px;
+  margin: 0;
 }

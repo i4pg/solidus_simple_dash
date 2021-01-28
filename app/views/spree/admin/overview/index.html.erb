@@ -22,10 +22,10 @@
 
     <div class='dashboard_wrapper' data-hook='admin_dashboard_historical_sales'>
       <div class='dashboard-historical-sales row'>
+        <%= render partial: 'spree/admin/overview/by_day_options' %>
         <%= render partial: 'spree/admin/overview/orders_by_day' %>
         <%= render partial: 'spree/admin/overview/abandoned_carts_by_day' %>
         <%= render partial: 'spree/admin/overview/new_users_by_day' %>
-        <%= render partial: 'spree/admin/overview/by_day_options' %>
       </div>
     </div>
 

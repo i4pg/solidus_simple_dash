@@ -5,26 +5,29 @@
     </span>
   </h5>
 
-  <div class='general-info info row'>
+  <div class='general-info info'>
     <table id='order_totals'>
       <tr>
-        <td style='width:23%;'>
-          <p><%= t('number.currency.format.unit') %></p>
-          <label id='orders_total'><%= number_with_delimiter @orders_total.to_i %></label>
-          <span><%= t('spree.order') %> <%= t('spree.total') %></span>
+        <td class='spacer'></td>
+        <td style='width:20%;'>
+          <span class='order_totals_title'><%= t('spree.order') %> <%= t('spree.total') %></span>
+          <label id='orders_total'>
+            <%= t('number.currency.format.unit') %> <span class='value'><%= number_with_delimiter @orders_total.to_i %></span>
+          </label>
         </td>
-        <td class='spacer'>|</td>
-        <td style='width:23%;'>
-          <p><%= t('number.currency.format.unit') %></p>
-          <label id='orders_line_total'><%= number_with_delimiter @orders_line_total.to_i %></label>
-          <span><%= t('spree.simple_dash.item') %> <%= t('spree.total') %></span>
+        <td style='width:20%;'>
+          <span class='order_totals_title'><%= t('spree.simple_dash.item') %> <%= t('spree.total') %></span>
+          <label id='orders_line_total'>
+            <%= t('number.currency.format.unit') %> <span class='value'><%= number_with_delimiter @orders_line_total.to_i %></span>
+          </label>
         </td>
-        <td class='spacer'>|</td>
-        <td style='width:23%;'>
-          <p><%= t('number.currency.format.unit') %></p>
-          <label id='orders_adjustment_total'><%= number_with_delimiter @orders_adjustment_total.to_i %></label>
-          <span><%= t('spree.adjustments') %></span>
+        <td style='width:20%;'>
+          <span class='order_totals_title'><%= t('spree.adjustments') %></span>
+          <label id='orders_adjustment_total'>
+            <%= t('number.currency.format.unit') %> <span class='value'><%= number_with_delimiter @orders_adjustment_total.to_i %></span>
+          </label>
         </td>
+        <td class='spacer'></td>
       </tr>
     </table>
   </div>
