@@ -1,3 +1,3 @@
 module SolidusSimpleDash
-  VERSION = '1.0.0.paragon2'
+  VERSION = '1.0.3.paragon'
 end
