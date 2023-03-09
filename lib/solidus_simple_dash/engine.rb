@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spree/core'
 require 'solidus_simple_dash/config'
 
@@ -6,6 +8,7 @@ module SolidusSimpleDash
     include SolidusSupport::EngineExtensions
 
     isolate_namespace ::Spree
+
     engine_name 'solidus_simple_dash'
 
     # use rspec for tests
@@ -16,6 +19,7 @@ module SolidusSimpleDash
     initializer 'solidus_simple_dash.add_admin_section' do
       Spree::Backend::Config.configure do |config|
         # This is the email submenu, useful for store users
+
         config.menu_items << config.class::MenuItem.new(
           [:overview],
           'bar-chart',
