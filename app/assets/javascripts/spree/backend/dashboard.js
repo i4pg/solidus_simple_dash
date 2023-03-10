@@ -69,6 +69,14 @@ function build_options(points, settings) {
 }
 
 jQuery(document).ready(function() {
+  var pieColors = [];
+
+  try {
+    pieColors = pie_colors;
+  } catch (error) {
+    pieColors = [];
+  }
+
   var pie_graph_options = {
     grid: {
       background:'#fff',
@@ -84,7 +92,7 @@ jQuery(document).ready(function() {
         shadow: false
       }
     },
-    seriesColors: pie_colors
+    seriesColors: pieColors
   }
 
   var series_graph_options = {

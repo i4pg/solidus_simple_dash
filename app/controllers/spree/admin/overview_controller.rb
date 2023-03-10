@@ -1,10 +1,11 @@
-# this clas was inspired (heavily) from the mephisto admin architecture
+# frozen_string_literal: true
 
 module Spree
   module Admin
     class OverviewController < Spree::Admin::BaseController
       before_action :display_ability
       before_action :set_date
+      before_action :value, only: :report_data
       before_action :date_range, only: :report_data
 
       def index
@@ -33,24 +34,29 @@ module Spree
 
       def report_data
         values = case params[:report]
-          when 'abandoned_carts'
-            '[[' + overview.orders_by_day('abandoned_carts').map do |day|
-              "['#{day[0]}', #{day[1]}]"
-            end.join(',') + ']]'
-          when 'orders'
-            '[[' + overview.orders_by_day.map do |day|
-              "['#{day[0]}', #{day[1]}]"
-            end.join(',') + ']]'
-          when 'new_users'
-            '[[' + overview.new_users_by_day.map do |day|
-              "['#{day[0]}', #{day[1]}]"
-            end.join(',') + ']]'
-          when 'orders_totals'
-            [orders_total: overview.orders_total.to_i,
-              orders_line_total: overview.orders_line_total.to_i,
-              orders_adjustment_total: overview.orders_adjustment_total.to_i
-            ].to_json
-        end
+                 when 'abandoned_carts'
+                   Array.new(
+                     overview.orders_by_day('abandoned_carts').map do |day|
+                       [day[0].to_s, day[1].to_s]
+                     end
+                   ).to_json
+                 when 'orders'
+                   Array.new(
+                     overview.orders_by_day.map do |day|
+                       [day[0].to_s, day[1].to_s]
+                     end
+                   ).to_json
+                 when 'new_users'
+                   Array.new(
+                     overview.new_users_by_day.map do |day|
+                       [day[0].to_s, day[1].to_s]
+                     end
+                   ).to_json
+                 when 'orders_totals'
+                   [orders_total: overview.orders_total.to_i,
+                    orders_line_total: overview.orders_line_total.to_i,
+                    orders_adjustment_total: overview.orders_adjustment_total.to_i].to_json
+                 end
 
         render js: values
       end
@@ -66,31 +72,39 @@ module Spree
       end
 
       def set_date
-        params.merge!({ from: (Time.new().to_date - 1.week).to_s(:db),
-          value: 'Count' })
+        params.merge!({
+          from: (Time.zone.now.to_date - 1.week).to_s(:db),
+          value: 'Count'
+        })
+      end
+
+      def value
+        params.merge!({
+          value: params[:value] || 'Count'
+        })
       end
 
       def date_range
-        from = Date.new(Time.now.year, Time.now.month, 1)
-        to = Date.new(Time.now.year, Time.now.month, -1)
+        from = Date.new(Time.zone.now.year, Time.zone.now.month, 1)
+        to = Date.new(Time.zone.now.year, Time.zone.now.month, -1)
 
         dates = case params[:name]
-          when '7_days'
-            { from: (Time.new().to_date - 1.week).to_s(:db) }
-          when '14_days'
-            { from: (Time.new().to_date - 2.week).to_s(:db) }
-          when 'this_month'
-            { from: from.to_s(:db),
-              to: to.to_s(:db) }
-          when 'last_month'
-            { from: (from - 1.month).to_s(:db),
-              to: (to - 1.month).to_s(:db) }
-          when 'this_year'
-            { from: Date.new(Time.now.year, 1, 1).to_s(:db) }
-          when 'last_year'
-            { from: Date.new(Time.now.year - 1, 1, 1).to_s(:db),
-              to: Date.new(Time.now.year - 1, 12, -1).to_s(:db) }
-        end
+                when '7_days'
+                  { from: (Time.zone.now.to_date - 1.week).to_s(:db) }
+                when '14_days'
+                  { from: (Time.zone.now.to_date - 2.weeks).to_s(:db) }
+                when 'this_month'
+                  { from: from.to_s(:db),
+                    to: to.to_s(:db) }
+                when 'last_month'
+                  { from: (from - 1.month).to_s(:db),
+                    to: (to - 1.month).to_s(:db) }
+                when 'this_year'
+                  { from: Date.new(Time.zone.now.year, 1, 1).to_s(:db) }
+                when 'last_year'
+                  { from: Date.new(Time.zone.now.year - 1, 1, 1).to_s(:db),
+                    to: Date.new(Time.zone.now.year - 1, 12, -1).to_s(:db) }
+                end
 
         params.merge!(dates)
       end

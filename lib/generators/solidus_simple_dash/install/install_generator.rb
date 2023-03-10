@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusSimpleDash
   module Generators
     class InstallGenerator < Rails::Generators::Base
@@ -20,10 +22,9 @@ module SolidusSimpleDash
         if run_migrations
           run 'bundle exec rake db:migrate'
         else
-          puts 'Skipping rake db:migrate, don\'t forget to run it!'
+          Rails.logger 'Skipping rake db:migrate, don\'t forget to run it!'
         end
       end
-
     end
   end
 end
